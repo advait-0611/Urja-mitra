@@ -4,7 +4,6 @@
 Smart Renewable Energy Utilization & Management System
 
 
-
 ## What We Built
 The current prototype provides a complete web-based workflow for:
 - Monitoring renewable generation, energy consumption, and grid import
@@ -17,6 +16,11 @@ The current prototype provides a complete web-based workflow for:
 - Displaying energy alerts and data-quality status
 - Running what-if analysis for additional flexible loads
 The system is designed as a decision-support prototype. It recommends operating periods rather than directly controlling physical appliances.
+
+<img width="1082" height="898" alt="dashboard" src="https://github.com/user-attachments/assets/f91517c9-2132-41d1-865e-cc551d070e05" />
+<img width="1127" height="896" alt="Smart Daily Energy Plam" src="https://github.com/user-attachments/assets/fba983de-e606-41df-8ee4-08109e39f04c" />
+<img width="1013" height="906" alt="appliances adder" src="https://github.com/user-attachments/assets/11c03f5e-1f5b-4ceb-b8b4-1f1d06d2c7b9" />
+
 ## Key Features
 Energy Dashboard
 - Total renewable generation
@@ -211,6 +215,7 @@ Appliance records support power consumption, priority, flexibility, preferred st
 The current version focuses on software-based monitoring, analysis, and scheduling recommendations.
 It does not directly switch or control physical appliances.
 The current energy workflow can be extended with live renewable-generation feeds, weather forecasting, smart meters, inverter integration, IoT devices, EV charging, and advanced optimization techniques. 
+
 ## Current Prototype Limitations
 Energy analysis depends on the available dataset rather than a live household solar installation.
 Recommendations are decision-support outputs and do not directly control appliances.
