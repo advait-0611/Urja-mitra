@@ -1,0 +1,3633 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Urja Mitra - Smart Renewable Energy Utilization and Management System"
+    >
+
+    <meta
+        name="theme-color"
+        content="#14532d"
+    >
+
+    <title>Urja Mitra | Renewable Energy Management</title>
+
+    <style>
+
+        /* =========================================================
+           URJA MITRA
+           Government-style Renewable Energy Management Interface
+        ========================================================= */
+
+        :root {
+
+            --green-dark: #14532d;
+            --green: #166534;
+            --green-mid: #15803d;
+            --green-light: #dcfce7;
+
+            --blue: #1d4ed8;
+            --blue-light: #dbeafe;
+
+            --amber: #b45309;
+            --amber-light: #fef3c7;
+
+            --red: #b91c1c;
+            --red-light: #fee2e2;
+
+            --text: #1f2937;
+            --muted: #64748b;
+
+            --border: #d9e1e7;
+            --border-light: #edf0f2;
+
+            --background: #f5f7f8;
+            --white: #ffffff;
+
+            --surface-soft: #f8faf9;
+
+            --shadow:
+                0 2px 8px rgba(15, 23, 42, 0.07);
+
+            --shadow-hover:
+                0 4px 12px rgba(15, 23, 42, 0.10);
+        }
+
+
+        /* =========================================================
+           BASE
+        ========================================================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: var(--background);
+
+            color: var(--text);
+
+            line-height: 1.5;
+        }
+
+
+        a {
+
+            color: inherit;
+
+            text-decoration: none;
+        }
+
+
+        button,
+        input,
+        select,
+        textarea {
+
+            font-family: inherit;
+        }
+
+
+        button {
+            cursor: pointer;
+        }
+
+
+        .container {
+
+            width:
+                min(
+                    1200px,
+                    calc(100% - 32px)
+                );
+
+            margin: 0 auto;
+        }
+
+
+        /* =========================================================
+           ACCESSIBILITY
+        ========================================================= */
+
+        .skip-link {
+
+            position: absolute;
+
+            left: -9999px;
+
+            top: 8px;
+
+            z-index: 9999;
+
+            background: var(--green-dark);
+
+            color: white;
+
+            padding: 8px 12px;
+
+            border-radius: 3px;
+
+            font-size: 12px;
+        }
+
+
+        .skip-link:focus {
+
+            left: 8px;
+        }
+
+
+        :focus-visible {
+
+            outline:
+                2px solid #2563eb;
+
+            outline-offset: 2px;
+        }
+
+
+        /* =========================================================
+           UTILITY BAR
+        ========================================================= */
+
+        .utility-bar {
+
+            background: #f1f3f4;
+
+            border-bottom:
+                1px solid #d7dce0;
+
+            font-size: 12px;
+
+            color: #475569;
+        }
+
+
+        .utility-inner {
+
+            min-height: 34px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+
+        .utility-left,
+        .utility-right {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 16px;
+        }
+
+
+        .utility-right span {
+
+            white-space: nowrap;
+        }
+
+
+        /* =========================================================
+           MAIN HEADER
+        ========================================================= */
+
+        .main-header {
+
+            background: var(--white);
+
+            border-bottom:
+                1px solid var(--border);
+        }
+
+
+        .header-inner {
+
+            min-height: 92px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 24px;
+        }
+
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+        }
+
+
+        .brand-mark {
+
+            width: 54px;
+
+            height: 54px;
+
+            border:
+                2px solid var(--green);
+
+            border-radius: 4px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: var(--green-dark);
+
+            font-size: 24px;
+
+            font-weight: 700;
+
+            background: #f8faf9;
+        }
+
+
+        .brand-title {
+
+            margin: 0;
+
+            font-size: 24px;
+
+            line-height: 1.1;
+
+            color: var(--green-dark);
+
+            font-weight: 700;
+        }
+
+
+        .brand-subtitle {
+
+            margin: 5px 0 0;
+
+            font-size: 12px;
+
+            color: var(--muted);
+        }
+
+
+        .header-status {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            font-size: 13px;
+
+            color: #475569;
+        }
+
+
+        .status-dot {
+
+            width: 9px;
+
+            height: 9px;
+
+            border-radius: 50%;
+
+            background: #16a34a;
+        }
+
+
+        /* =========================================================
+           NAVIGATION
+        ========================================================= */
+
+        .nav-bar {
+
+            background: var(--green-dark);
+
+            color: white;
+        }
+
+
+        .nav-inner {
+
+            min-height: 46px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 0;
+
+            overflow-x: auto;
+        }
+
+
+        .nav-link {
+
+            min-height: 46px;
+
+            padding: 0 18px;
+
+            display: flex;
+
+            align-items: center;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            border-left:
+                1px solid rgba(255,255,255,0.08);
+
+            transition:
+                background 0.15s ease;
+
+            white-space: nowrap;
+        }
+
+
+        .nav-link:hover,
+        .nav-link.active {
+
+            background: var(--green);
+        }
+
+
+        /* =========================================================
+           BREADCRUMB
+        ========================================================= */
+
+        .breadcrumb {
+
+            background: white;
+
+            border-bottom:
+                1px solid var(--border);
+        }
+
+
+        .breadcrumb-inner {
+
+            min-height: 38px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            font-size: 12px;
+
+            color: var(--muted);
+        }
+
+
+        .breadcrumb-current {
+
+            color: var(--green-dark);
+
+            font-weight: 600;
+        }
+
+
+        /* =========================================================
+           PAGE HEADING
+        ========================================================= */
+
+        .page-heading {
+
+            padding:
+                28px 0 20px;
+        }
+
+
+        .page-heading h1 {
+
+            margin: 0;
+
+            font-size: 29px;
+
+            color: #172b1d;
+
+            font-weight: 700;
+        }
+
+
+        .page-heading p {
+
+            margin: 7px 0 0;
+
+            color: var(--muted);
+
+            font-size: 14px;
+        }
+
+
+        .page-meta {
+
+            display: flex;
+
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+
+            margin-top: 10px;
+        }
+
+
+        /* =========================================================
+           SYSTEM NOTICE
+        ========================================================= */
+
+        .notice {
+
+            background: #f8fafc;
+
+            border:
+                1px solid var(--border);
+
+            border-left:
+                4px solid var(--green);
+
+            padding: 12px 15px;
+
+            margin-bottom: 20px;
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 11px;
+        }
+
+
+        .notice-icon {
+
+            color: var(--green);
+
+            font-weight: 700;
+
+            font-size: 16px;
+        }
+
+
+        .notice strong {
+
+            display: block;
+
+            font-size: 13px;
+
+            color: #1e293b;
+        }
+
+
+        .notice span {
+
+            display: block;
+
+            margin-top: 2px;
+
+            font-size: 12px;
+
+            color: var(--muted);
+        }
+
+
+        /* =========================================================
+           SUMMARY CARDS
+        ========================================================= */
+
+        .summary-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 14px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .summary-card {
+
+            background: white;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 3px;
+
+            box-shadow: var(--shadow);
+
+            padding: 18px;
+
+            min-height: 135px;
+
+            transition:
+                box-shadow 0.15s ease;
+        }
+
+
+        .summary-card:hover {
+
+            box-shadow: var(--shadow-hover);
+        }
+
+
+        .summary-card-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+        }
+
+
+        .summary-label {
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            color: #64748b;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.3px;
+        }
+
+
+        .summary-icon {
+
+            width: 30px;
+
+            height: 30px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 3px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: var(--green);
+
+            background: #f8faf9;
+
+            font-weight: 700;
+        }
+
+
+        .summary-value {
+
+            margin-top: 13px;
+
+            font-size: 28px;
+
+            line-height: 1;
+
+            font-weight: 700;
+
+            color: #172b1d;
+        }
+
+
+        .summary-unit {
+
+            margin-left: 4px;
+
+            font-size: 13px;
+
+            color: var(--muted);
+
+            font-weight: 500;
+        }
+
+
+        .summary-description {
+
+            margin-top: 10px;
+
+            font-size: 11px;
+
+            color: var(--muted);
+        }
+
+
+        /* =========================================================
+           PANELS
+        ========================================================= */
+
+        .panel {
+
+            background: white;
+
+            border:
+                1px solid var(--border);
+
+            box-shadow: var(--shadow);
+
+            border-radius: 3px;
+        }
+
+
+        .panel-header {
+
+            min-height: 55px;
+
+            padding: 13px 17px;
+
+            border-bottom:
+                1px solid var(--border);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+
+        .panel-title {
+
+            margin: 0;
+
+            font-size: 15px;
+
+            color: #1e293b;
+
+            font-weight: 700;
+        }
+
+
+        .panel-subtitle {
+
+            margin: 2px 0 0;
+
+            font-size: 11px;
+
+            color: var(--muted);
+        }
+
+
+        .panel-body {
+
+            padding: 17px;
+        }
+
+
+        /* =========================================================
+           DASHBOARD GRID
+        ========================================================= */
+
+        .dashboard-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 2fr)
+                minmax(300px, 1fr);
+
+            gap: 18px;
+
+            margin-bottom: 20px;
+        }
+
+
+        /* =========================================================
+           CHART
+        ========================================================= */
+
+        .chart-container {
+
+            height: 350px;
+
+            position: relative;
+        }
+
+
+        #energyChart {
+
+            width: 100% !important;
+
+            height: 100% !important;
+        }
+
+
+        .chart-legend-note {
+
+            display: flex;
+
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            gap: 15px;
+
+            margin-top: 12px;
+
+            padding-top: 12px;
+
+            border-top:
+                1px solid var(--border-light);
+
+            font-size: 11px;
+
+            color: var(--muted);
+        }
+
+
+        .legend-item {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 6px;
+        }
+
+
+        .legend-line {
+
+            width: 18px;
+
+            height: 3px;
+
+            border-radius: 3px;
+        }
+
+
+        .legend-green {
+            background: #16a34a;
+        }
+
+
+        .legend-blue {
+            background: #2563eb;
+        }
+
+
+        .legend-gray {
+            background: #64748b;
+        }
+
+
+        /* =========================================================
+           PERFORMANCE
+        ========================================================= */
+
+        .metric-block {
+
+            padding: 15px 0;
+
+            border-bottom:
+                1px solid var(--border-light);
+        }
+
+
+        .metric-block:first-child {
+
+            padding-top: 0;
+        }
+
+
+        .metric-block:last-child {
+
+            border-bottom: none;
+
+            padding-bottom: 0;
+        }
+
+
+        .metric-top {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+        }
+
+
+        .metric-name {
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            color: #475569;
+        }
+
+
+        .metric-value {
+
+            font-size: 18px;
+
+            font-weight: 700;
+
+            color: #172b1d;
+        }
+
+
+        .progress-track {
+
+            width: 100%;
+
+            height: 7px;
+
+            background: #edf1f3;
+
+            border-radius: 5px;
+
+            margin-top: 8px;
+
+            overflow: hidden;
+        }
+
+
+        .progress-fill {
+
+            height: 100%;
+
+            width: 0%;
+
+            background: var(--green-mid);
+
+            border-radius: 5px;
+
+            transition:
+                width 0.5s ease;
+        }
+
+
+        .progress-fill.blue {
+
+            background: var(--blue);
+        }
+
+
+        .metric-description {
+
+            margin-top: 5px;
+
+            font-size: 11px;
+
+            color: var(--muted);
+        }
+
+
+        /* =========================================================
+           INFORMATION CARDS
+        ========================================================= */
+
+        .info-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 18px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .info-value {
+
+            margin-top: 8px;
+
+            font-size: 24px;
+
+            font-weight: 700;
+
+            color: var(--green-dark);
+        }
+
+
+        .info-label {
+
+            font-size: 11px;
+
+            color: var(--muted);
+        }
+
+
+        .info-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            padding: 9px 0;
+
+            border-bottom:
+                1px solid var(--border-light);
+
+            font-size: 12px;
+        }
+
+
+        .info-row:last-child {
+
+            border-bottom: none;
+        }
+
+
+        .info-row-label {
+
+            color: var(--muted);
+        }
+
+
+        .info-row-value {
+
+            font-weight: 700;
+
+            color: #1e293b;
+
+            text-align: right;
+        }
+
+
+        /* =========================================================
+           LOWER SECTIONS
+        ========================================================= */
+
+        .lower-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 18px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .data-list {
+
+            display: flex;
+
+            flex-direction: column;
+        }
+
+
+        .data-row {
+
+            padding: 13px 0;
+
+            border-bottom:
+                1px solid var(--border-light);
+
+            display: flex;
+
+            align-items: flex-start;
+
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+
+        .data-row:last-child {
+
+            border-bottom: none;
+        }
+
+
+        .data-title {
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            color: #1e293b;
+        }
+
+
+        .data-text {
+
+            margin-top: 3px;
+
+            font-size: 11px;
+
+            color: var(--muted);
+        }
+
+
+        /* =========================================================
+           BADGES
+        ========================================================= */
+
+        .badge {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 4px 8px;
+
+            border-radius: 3px;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            white-space: nowrap;
+        }
+
+
+        .badge-info {
+
+            color: #1d4ed8;
+
+            background: var(--blue-light);
+        }
+
+
+        .badge-warning {
+
+            color: var(--amber);
+
+            background: var(--amber-light);
+        }
+
+
+        .badge-success {
+
+            color: var(--green);
+
+            background: var(--green-light);
+        }
+
+
+        .badge-danger {
+
+            color: var(--red);
+
+            background: var(--red-light);
+        }
+
+
+        /* =========================================================
+           SMART DAILY PLAN
+        ========================================================= */
+
+        .daily-plan-panel {
+
+            margin-bottom: 20px;
+        }
+
+
+        .daily-plan-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1.5fr
+                1fr;
+
+            gap: 18px;
+        }
+
+
+        .plan-highlight {
+
+            background: var(--surface-soft);
+
+            border:
+                1px solid #e2e8e4;
+
+            padding: 15px;
+        }
+
+
+        .plan-highlight-title {
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            color: var(--green-dark);
+        }
+
+
+        .plan-highlight-value {
+
+            margin-top: 6px;
+
+            font-size: 22px;
+
+            font-weight: 700;
+
+            color: #172b1d;
+        }
+
+
+        .plan-highlight-text {
+
+            margin-top: 4px;
+
+            font-size: 11px;
+
+            color: var(--muted);
+        }
+
+
+        .plan-status {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin-top: 10px;
+
+            font-size: 11px;
+
+            color: var(--muted);
+        }
+
+
+        .plan-status-dot {
+
+            width: 7px;
+
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #16a34a;
+        }
+
+
+        /* =========================================================
+           SCHEDULE MANAGEMENT
+        ========================================================= */
+
+        .schedule-panel {
+
+            margin-bottom: 20px;
+        }
+
+
+        .schedule-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1fr)
+                320px;
+
+            gap: 20px;
+        }
+
+
+        .schedule-form {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 12px;
+        }
+
+
+        .form-group {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 5px;
+        }
+
+
+        .form-group.full {
+
+            grid-column: 1 / -1;
+        }
+
+
+        .form-label {
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+            color: #475569;
+        }
+
+
+        .form-control {
+
+            width: 100%;
+
+            min-height: 38px;
+
+            padding: 8px 10px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 3px;
+
+            background: white;
+
+            color: var(--text);
+
+            font-size: 12px;
+        }
+
+
+        .form-control:focus {
+
+            border-color:
+                #2563eb;
+
+            outline: none;
+        }
+
+
+        .schedule-help {
+
+            background: #f8fafc;
+
+            border:
+                1px solid var(--border);
+
+            padding: 14px;
+        }
+
+
+        .schedule-help-title {
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            color: #1e293b;
+        }
+
+
+        .schedule-help-text {
+
+            margin-top: 6px;
+
+            font-size: 11px;
+
+            color: var(--muted);
+        }
+
+
+        /* =========================================================
+           BUTTONS
+        ========================================================= */
+
+        .button-row {
+
+            display: flex;
+
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+
+            margin-top: 12px;
+        }
+
+
+        .primary-button {
+
+            border: none;
+
+            background: var(--green-dark);
+
+            color: white;
+
+            padding: 11px 15px;
+
+            border-radius: 3px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            transition:
+                background 0.15s ease;
+        }
+
+
+        .primary-button:hover {
+
+            background: var(--green);
+        }
+
+
+        .primary-button:disabled {
+
+            opacity: 0.6;
+
+            cursor: not-allowed;
+        }
+
+
+        .secondary-button {
+
+            border:
+                1px solid var(--border);
+
+            background: white;
+
+            color: #334155;
+
+            padding: 10px 14px;
+
+            border-radius: 3px;
+
+            font-size: 12px;
+
+            font-weight: 600;
+        }
+
+
+        .secondary-button:hover {
+
+            background: #f8fafc;
+        }
+
+
+        /* =========================================================
+           OPTIMIZER
+        ========================================================= */
+
+        .optimizer-panel {
+
+            margin-bottom: 20px;
+        }
+
+
+        .optimizer-content {
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1fr)
+                260px;
+
+            gap: 20px;
+        }
+
+
+        .optimizer-intro {
+
+            font-size: 13px;
+
+            color: #475569;
+
+            margin: 0 0 13px;
+        }
+
+
+        .optimizer-points {
+
+            margin: 0;
+
+            padding-left: 20px;
+
+            font-size: 12px;
+
+            color: #475569;
+        }
+
+
+        .optimizer-points li {
+
+            margin-bottom: 7px;
+        }
+
+
+        .optimizer-action {
+
+            border-left:
+                1px solid var(--border);
+
+            padding-left: 20px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+        }
+
+
+        .optimizer-status {
+
+            margin-top: 8px;
+
+            font-size: 10px;
+
+            color: var(--muted);
+        }
+
+
+        #optimizerResult {
+
+            display: none;
+
+            margin-top: 15px;
+
+            border-top:
+                1px solid var(--border);
+
+            padding-top: 15px;
+        }
+
+
+        .optimizer-summary-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 10px;
+        }
+
+
+        .optimizer-summary-box {
+
+            background: #f8faf9;
+
+            border:
+                1px solid #e2e8e4;
+
+            padding: 11px;
+        }
+
+
+        .optimizer-summary-label {
+
+            font-size: 10px;
+
+            color: var(--muted);
+        }
+
+
+        .optimizer-summary-value {
+
+            margin-top: 3px;
+
+            font-size: 18px;
+
+            font-weight: 700;
+
+            color: var(--green-dark);
+        }
+
+
+        /* =========================================================
+           EXPLAINABLE RECOMMENDATION
+        ========================================================= */
+
+        .recommendation-box {
+
+            margin-top: 12px;
+
+            padding: 12px;
+
+            background: #f8fafc;
+
+            border:
+                1px solid var(--border);
+        }
+
+
+        .recommendation-title {
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            color: #1e293b;
+        }
+
+
+        .recommendation-text {
+
+            margin-top: 4px;
+
+            font-size: 11px;
+
+            color: var(--muted);
+        }
+
+
+        /* =========================================================
+           DATA QUALITY
+        ========================================================= */
+
+        .quality-indicator {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .quality-value {
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            color: var(--green-dark);
+        }
+
+
+        .quality-bar {
+
+            width: 100%;
+
+            height: 6px;
+
+            background: #edf1f3;
+
+            border-radius: 5px;
+
+            overflow: hidden;
+        }
+
+
+        .quality-bar-fill {
+
+            width: 0%;
+
+            height: 100%;
+
+            background: var(--green-mid);
+
+            transition:
+                width 0.5s ease;
+        }
+
+
+        /* =========================================================
+           LOADING / EMPTY / ERROR
+        ========================================================= */
+
+        .loading-text {
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+            padding: 8px 0;
+        }
+
+
+        .data-error {
+
+            color: var(--red);
+
+            font-size: 12px;
+
+            padding: 8px 0;
+        }
+
+
+        .empty-state {
+
+            padding: 18px 0;
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+            text-align: center;
+        }
+
+
+        .last-updated {
+
+            font-size: 10px;
+
+            color: var(--muted);
+        }
+
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        .footer {
+
+            margin-top: 30px;
+
+            background: #1f2937;
+
+            color: #d1d5db;
+        }
+
+
+        .footer-inner {
+
+            min-height: 100px;
+
+            padding: 20px 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+
+        .footer-title {
+
+            color: white;
+
+            font-weight: 700;
+
+            font-size: 14px;
+        }
+
+
+        .footer-text {
+
+            margin-top: 3px;
+
+            font-size: 11px;
+
+            color: #9ca3af;
+        }
+
+
+        .footer-right {
+
+            font-size: 11px;
+
+            color: #9ca3af;
+
+            text-align: right;
+        }
+
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media (max-width: 1000px) {
+
+            .summary-grid {
+
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+
+            .dashboard-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .info-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .daily-plan-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .schedule-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .optimizer-content {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .optimizer-action {
+
+                border-left: none;
+
+                border-top:
+                    1px solid var(--border);
+
+                padding-left: 0;
+
+                padding-top: 18px;
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .container {
+
+                width:
+                    min(
+                        100% - 20px,
+                        1200px
+                    );
+            }
+
+
+            .utility-left {
+
+                display: none;
+            }
+
+
+            .header-inner {
+
+                min-height: 78px;
+            }
+
+
+            .brand-title {
+
+                font-size: 20px;
+            }
+
+
+            .brand-subtitle {
+
+                font-size: 10px;
+            }
+
+
+            .header-status {
+
+                display: none;
+            }
+
+
+            .summary-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .lower-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .schedule-form {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .form-group.full {
+
+                grid-column: auto;
+            }
+
+
+            .optimizer-summary-grid {
+
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+
+            .chart-container {
+
+                height: 280px;
+            }
+
+
+            .page-heading h1 {
+
+                font-size: 24px;
+            }
+
+
+            .footer-inner {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+            }
+
+
+            .footer-right {
+
+                text-align: left;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- =========================================================
+         ACCESSIBILITY
+    ========================================================== -->
+
+    <a
+        href="#dashboard"
+        class="skip-link"
+    >
+        Skip to main content
+    </a>
+
+
+    <!-- =========================================================
+         GOVERNMENT / UTILITY BAR
+    ========================================================== -->
+
+    <div class="utility-bar">
+
+        <div class="container utility-inner">
+
+            <div class="utility-left">
+
+                <span>
+                    Government Digital Energy Initiative
+                </span>
+
+                <span>|</span>
+
+                <span>
+                    Smart Renewable Energy Management
+                </span>
+
+            </div>
+
+
+            <div class="utility-right">
+
+                <span>
+                    Accessible Interface
+                </span>
+
+                <span>
+                    English
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         MAIN HEADER
+    ========================================================== -->
+
+    <header class="main-header">
+
+        <div class="container header-inner">
+
+            <div class="brand">
+
+                <div
+                    class="brand-mark"
+                    aria-hidden="true"
+                >
+                    U
+                </div>
+
+
+                <div>
+
+                    <h2 class="brand-title">
+                        URJA MITRA
+                    </h2>
+
+                    <p class="brand-subtitle">
+                        Smart Renewable Energy Utilization &amp;
+                        Management System
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="header-status">
+
+                <span class="status-dot"></span>
+
+                <span>
+                    System Operational
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================================================
+         NAVIGATION
+    ========================================================== -->
+
+    <nav
+        class="nav-bar"
+        aria-label="Main navigation"
+    >
+
+        <div class="container nav-inner">
+
+            <a
+                href="#dashboard"
+                class="nav-link active"
+            >
+                Dashboard
+            </a>
+
+
+            <a
+                href="#energy-analysis"
+                class="nav-link"
+            >
+                Energy Analysis
+            </a>
+
+
+            <a
+                href="#appliances"
+                class="nav-link"
+            >
+                Smart Appliances
+            </a>
+
+
+            <a
+                href="#schedules"
+                class="nav-link"
+            >
+                Schedules
+            </a>
+
+
+            <a
+                href="#alerts"
+                class="nav-link"
+            >
+                Alerts
+            </a>
+
+
+            <a
+                href="#optimizer"
+                class="nav-link"
+            >
+                Smart Optimizer
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================================================
+         BREADCRUMB
+    ========================================================== -->
+
+    <div class="breadcrumb">
+
+        <div class="container breadcrumb-inner">
+
+            <span>
+                Home
+            </span>
+
+            <span>/</span>
+
+            <span class="breadcrumb-current">
+                Energy Dashboard
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         MAIN
+    ========================================================== -->
+
+    <main id="dashboard">
+
+        <div class="container">
+
+
+            <!-- =================================================
+                 PAGE HEADING
+            ================================================== -->
+
+            <section class="page-heading">
+
+                <h1>
+                    Renewable Energy Dashboard
+                </h1>
+
+                <p>
+                    Monitor renewable generation, energy consumption,
+                    grid dependency and renewable-energy utilization.
+                </p>
+
+                <div class="page-meta">
+
+                    <span class="badge badge-success">
+                        Renewable Energy Monitoring
+                    </span>
+
+                    <span class="badge badge-info">
+                        Decision Support
+                    </span>
+
+                    <span
+                        class="last-updated"
+                        id="lastUpdated"
+                    >
+                        Loading data...
+                    </span>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 SYSTEM NOTICE
+            ================================================== -->
+
+            <div
+                class="notice"
+                role="status"
+            >
+
+                <div
+                    class="notice-icon"
+                    aria-hidden="true"
+                >
+                    i
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Dashboard information
+                    </strong>
+
+                    <span id="systemNoticeText">
+                        Energy readings are being retrieved from
+                        the Urja Mitra database.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 SUMMARY CARDS
+            ================================================== -->
+
+            <section
+                class="summary-grid"
+                aria-label="Energy summary"
+            >
+
+
+                <!-- Renewable -->
+
+                <article class="summary-card">
+
+                    <div class="summary-card-header">
+
+                        <span class="summary-label">
+                            Renewable Generation
+                        </span>
+
+                        <span
+                            class="summary-icon"
+                            aria-hidden="true"
+                        >
+                            R
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary-value">
+
+                        <span id="totalRenewable">
+                            --
+                        </span>
+
+                        <span class="summary-unit">
+                            kWh
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary-description">
+                        Total renewable energy generated
+                        across available readings.
+                    </div>
+
+                </article>
+
+
+                <!-- Consumption -->
+
+                <article class="summary-card">
+
+                    <div class="summary-card-header">
+
+                        <span class="summary-label">
+                            Energy Consumption
+                        </span>
+
+                        <span
+                            class="summary-icon"
+                            aria-hidden="true"
+                        >
+                            C
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary-value">
+
+                        <span id="totalConsumption">
+                            --
+                        </span>
+
+                        <span class="summary-unit">
+                            kWh
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary-description">
+                        Total recorded electricity consumption.
+                    </div>
+
+                </article>
+
+
+                <!-- Grid -->
+
+                <article class="summary-card">
+
+                    <div class="summary-card-header">
+
+                        <span class="summary-label">
+                            Grid Import
+                        </span>
+
+                        <span
+                            class="summary-icon"
+                            aria-hidden="true"
+                        >
+                            G
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary-value">
+
+                        <span id="totalGridImport">
+                            --
+                        </span>
+
+                        <span class="summary-unit">
+                            kWh
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary-description">
+                        Estimated energy supplied by the grid.
+                    </div>
+
+                </article>
+
+
+                <!-- CO2 -->
+
+                <article class="summary-card">
+
+                    <div class="summary-card-header">
+
+                        <span class="summary-label">
+                            Estimated CO₂ Avoided
+                        </span>
+
+                        <span
+                            class="summary-icon"
+                            aria-hidden="true"
+                        >
+                            E
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary-value">
+
+                        <span id="estimatedCO2Avoided">
+                            --
+                        </span>
+
+                        <span class="summary-unit">
+                            kg
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary-description">
+                        Prototype estimate based on renewable usage.
+                    </div>
+
+                </article>
+
+            </section>
+
+
+            <!-- =================================================
+                 CHART + PERFORMANCE
+            ================================================== -->
+
+            <section
+                class="dashboard-grid"
+                id="energy-analysis"
+            >
+
+
+                <!-- CHART -->
+
+                <article class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h2 class="panel-title">
+                                Energy Generation &amp; Consumption
+                            </h2>
+
+                            <p class="panel-subtitle">
+                                Hourly renewable generation,
+                                consumption and grid import.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel-body">
+
+                        <div class="chart-container">
+
+                            <canvas
+                                id="energyChart"
+                                aria-label="Energy generation and consumption chart"
+                            ></canvas>
+
+                        </div>
+
+
+                        <div class="chart-legend-note">
+
+                            <div class="legend-item">
+
+                                <span
+                                    class="legend-line legend-green"
+                                    aria-hidden="true"
+                                ></span>
+
+                                Renewable Generation
+
+                            </div>
+
+
+                            <div class="legend-item">
+
+                                <span
+                                    class="legend-line legend-blue"
+                                    aria-hidden="true"
+                                ></span>
+
+                                Energy Consumption
+
+                            </div>
+
+
+                            <div class="legend-item">
+
+                                <span
+                                    class="legend-line legend-gray"
+                                    aria-hidden="true"
+                                ></span>
+
+                                Grid Import
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PERFORMANCE -->
+
+                <article class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h2 class="panel-title">
+                                Energy Performance
+                            </h2>
+
+                            <p class="panel-subtitle">
+                                Key utilization indicators.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel-body">
+
+
+                        <!-- Renewable utilization -->
+
+                        <div class="metric-block">
+
+                            <div class="metric-top">
+
+                                <span class="metric-name">
+                                    Renewable Utilization
+                                </span>
+
+                                <span
+                                    class="metric-value"
+                                    id="renewableUtilization"
+                                >
+                                    --
+                                </span>
+
+                            </div>
+
+
+                            <div class="progress-track">
+
+                                <div
+                                    class="progress-fill"
+                                    id="renewableUtilizationBar"
+                                ></div>
+
+                            </div>
+
+
+                            <div class="metric-description">
+                                Estimated percentage of generated
+                                renewable energy utilized.
+                            </div>
+
+                        </div>
+
+
+                        <!-- Grid dependency -->
+
+                        <div class="metric-block">
+
+                            <div class="metric-top">
+
+                                <span class="metric-name">
+                                    Grid Dependency
+                                </span>
+
+                                <span
+                                    class="metric-value"
+                                    id="gridDependency"
+                                >
+                                    --
+                                </span>
+
+                            </div>
+
+
+                            <div class="progress-track">
+
+                                <div
+                                    class="progress-fill blue"
+                                    id="gridDependencyBar"
+                                ></div>
+
+                            </div>
+
+
+                            <div class="metric-description">
+                                Share of recorded consumption supplied
+                                through grid import.
+                            </div>
+
+                        </div>
+
+
+                        <!-- Renewable share -->
+
+                        <div class="metric-block">
+
+                            <div class="metric-top">
+
+                                <span class="metric-name">
+                                    Renewable Share
+                                </span>
+
+                                <span
+                                    class="metric-value"
+                                    id="renewableShare"
+                                >
+                                    --
+                                </span>
+
+                            </div>
+
+
+                            <div class="progress-track">
+
+                                <div
+                                    class="progress-fill"
+                                    id="renewableShareBar"
+                                ></div>
+
+                            </div>
+
+
+                            <div class="metric-description">
+                                Estimated renewable contribution
+                                to total energy consumption.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </section>
+
+
+            <!-- =================================================
+                 SYSTEM INFORMATION
+            ================================================== -->
+
+            <section class="info-grid">
+
+
+                <!-- Renewable Performance -->
+
+                <article class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h2 class="panel-title">
+                                Renewable Performance
+                            </h2>
+
+                            <p class="panel-subtitle">
+                                Current dashboard indicators.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel-body">
+
+                        <div class="info-value">
+
+                            <span id="renewableShareLarge">
+                                --
+                            </span>%
+
+                        </div>
+
+
+                        <div class="info-label">
+                            Renewable share of consumption
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Peak Window -->
+
+                <article class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h2 class="panel-title">
+                                Peak Renewable Window
+                            </h2>
+
+                            <p class="panel-subtitle">
+                                Highest recorded renewable generation.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel-body">
+
+                        <div
+                            class="info-value"
+                            id="peakTime"
+                        >
+                            --
+                        </div>
+
+
+                        <div class="info-label">
+                            Peak generation time
+                        </div>
+
+
+                        <div
+                            class="info-row"
+                            style="margin-top: 12px;"
+                        >
+
+                            <span class="info-row-label">
+                                Renewable generation
+                            </span>
+
+
+                            <span class="info-row-value">
+
+                                <span id="peakRenewable">
+                                    --
+                                </span>
+
+                                kWh
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Dataset -->
+
+                <article class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h2 class="panel-title">
+                                Dataset Status
+                            </h2>
+
+                            <p class="panel-subtitle">
+                                Current database indicators.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel-body">
+
+                        <div class="info-row">
+
+                            <span class="info-row-label">
+                                Energy readings
+                            </span>
+
+                            <span
+                                class="info-row-value"
+                                id="readings"
+                            >
+                                --
+                            </span>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span class="info-row-label">
+                                Appliances
+                            </span>
+
+                            <span
+                                class="info-row-value"
+                                id="totalAppliances"
+                            >
+                                --
+                            </span>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span class="info-row-label">
+                                Alerts
+                            </span>
+
+                            <span
+                                class="info-row-value"
+                                id="totalAlerts"
+                            >
+                                --
+                            </span>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span class="info-row-label">
+                                Schedules
+                            </span>
+
+                            <span
+                                class="info-row-value"
+                                id="totalSchedules"
+                            >
+                                --
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </section>
+
+
+            <!-- =================================================
+                 SMART DAILY PLAN
+            ================================================== -->
+
+            <section
+                class="panel daily-plan-panel"
+                id="daily-plan"
+            >
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2 class="panel-title">
+                            Smart Daily Energy Plan
+                        </h2>
+
+                        <p class="panel-subtitle">
+                            Renewable-aware operating guidance generated
+                            from available energy conditions.
+                        </p>
+
+                    </div>
+
+
+                    <span class="badge badge-success">
+                        Renewable Optimized
+                    </span>
+
+                </div>
+
+
+                <div class="panel-body">
+
+                    <div class="daily-plan-grid">
+
+
+                        <div>
+
+                            <div class="plan-highlight">
+
+                                <div class="plan-highlight-title">
+                                    Recommended Renewable Window
+                                </div>
+
+                                <div
+                                    class="plan-highlight-value"
+                                    id="dailyPlanWindow"
+                                >
+                                    --
+                                </div>
+
+                                <div
+                                    class="plan-highlight-text"
+                                    id="dailyPlanDescription"
+                                >
+                                    Run flexible appliances during periods
+                                    of higher renewable availability where possible.
+                                </div>
+
+
+                                <div class="plan-status">
+
+                                    <span
+                                        class="plan-status-dot"
+                                        aria-hidden="true"
+                                    ></span>
+
+                                    Renewable availability analysis enabled
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div>
+
+                            <div class="info-row">
+
+                                <span class="info-row-label">
+                                    Flexible appliances
+                                </span>
+
+                                <span
+                                    class="info-row-value"
+                                    id="dailyPlanFlexible"
+                                >
+                                    --
+                                </span>
+
+                            </div>
+
+
+                            <div class="info-row">
+
+                                <span class="info-row-label">
+                                    Planned renewable usage
+                                </span>
+
+                                <span
+                                    class="info-row-value"
+                                    id="dailyPlanRenewable"
+                                >
+                                    --
+                                </span>
+
+                            </div>
+
+
+                            <div class="info-row">
+
+                                <span class="info-row-label">
+                                    Estimated grid reduction
+                                </span>
+
+                                <span
+                                    class="info-row-value"
+                                    id="dailyPlanGridReduction"
+                                >
+                                    --
+                                </span>
+
+                            </div>
+
+
+                            <div class="info-row">
+
+                                <span class="info-row-label">
+                                    Plan status
+                                </span>
+
+                                <span
+                                    class="info-row-value"
+                                    id="dailyPlanStatus"
+                                >
+                                    Ready
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 APPLIANCES + ALERTS
+            ================================================== -->
+
+            <section class="lower-grid">
+
+
+                <!-- APPLIANCES -->
+
+                <article
+                    class="panel"
+                    id="appliances"
+                >
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h2 class="panel-title">
+                                Smart Appliance Overview
+                            </h2>
+
+                            <p class="panel-subtitle">
+                                Flexible loads available for
+                                renewable-aware scheduling.
+                            </p>
+
+                        </div>
+
+
+                        <span
+                            class="badge badge-info"
+                            id="applianceCountBadge"
+                        >
+                            Loading
+                        </span>
+
+                    </div>
+
+
+                    <div class="panel-body">
+
+                        <div
+                            class="data-list"
+                            id="applianceList"
+                        >
+
+                            <div class="loading-text">
+                                Loading appliance data...
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ALERTS -->
+
+                <article
+                    class="panel"
+                    id="alerts"
+                >
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h2 class="panel-title">
+                                Energy Alerts
+                            </h2>
+
+                            <p class="panel-subtitle">
+                                Renewable-energy utilization alerts.
+                            </p>
+
+                        </div>
+
+
+                        <span
+                            class="badge badge-warning"
+                            id="alertCountBadge"
+                        >
+                            Loading
+                        </span>
+
+                    </div>
+
+
+                    <div class="panel-body">
+
+                        <div
+                            class="data-list"
+                            id="alertList"
+                        >
+
+                            <div class="loading-text">
+                                Loading alerts...
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </section>
+
+
+            <!-- =================================================
+                 SCHEDULE MANAGEMENT
+            ================================================== -->
+
+            <section
+                class="panel schedule-panel"
+                id="schedules"
+            >
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2 class="panel-title">
+                            Appliance Schedule Management
+                        </h2>
+
+                        <p class="panel-subtitle">
+                            Create renewable-aware operating schedules
+                            within appliance time constraints.
+                        </p>
+
+                    </div>
+
+
+                    <span class="badge badge-info">
+                        User Controlled
+                    </span>
+
+                </div>
+
+
+                <div class="panel-body">
+
+                    <div class="schedule-grid">
+
+
+                        <!-- FORM -->
+
+                        <div>
+
+                            <form
+                                id="scheduleForm"
+                                class="schedule-form"
+                            >
+
+                                <div class="form-group">
+
+                                    <label
+                                        class="form-label"
+                                        for="scheduleAppliance"
+                                    >
+                                        Appliance
+                                    </label>
+
+                                    <select
+                                        class="form-control"
+                                        id="scheduleAppliance"
+                                    >
+
+                                        <option value="">
+                                            Select appliance
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <div class="form-group">
+
+                                    <label
+                                        class="form-label"
+                                        for="scheduleDate"
+                                    >
+                                        Schedule Date
+                                    </label>
+
+                                    <input
+                                        class="form-control"
+                                        type="date"
+                                        id="scheduleDate"
+                                    >
+
+                                </div>
+
+
+                                <div class="form-group">
+
+                                    <label
+                                        class="form-label"
+                                        for="scheduleStart"
+                                    >
+                                        Start Time
+                                    </label>
+
+                                    <input
+                                        class="form-control"
+                                        type="time"
+                                        id="scheduleStart"
+                                    >
+
+                                </div>
+
+
+                                <div class="form-group">
+
+                                    <label
+                                        class="form-label"
+                                        for="scheduleEnd"
+                                    >
+                                        End Time
+                                    </label>
+
+                                    <input
+                                        class="form-control"
+                                        type="time"
+                                        id="scheduleEnd"
+                                    >
+
+                                </div>
+
+
+                                <div class="form-group full">
+
+                                    <label
+                                        class="form-label"
+                                        for="scheduleReason"
+                                    >
+                                        Schedule Note
+                                    </label>
+
+                                    <input
+                                        class="form-control"
+                                        type="text"
+                                        id="scheduleReason"
+                                        placeholder="Optional reason or user preference"
+                                        maxlength="250"
+                                    >
+
+                                </div>
+
+                            </form>
+
+
+                            <div class="button-row">
+
+                                <button
+                                    type="button"
+                                    class="primary-button"
+                                    id="saveScheduleButton"
+                                >
+                                    Save Schedule
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    class="secondary-button"
+                                    id="clearScheduleButton"
+                                >
+                                    Clear
+                                </button>
+
+                            </div>
+
+
+                            <div
+                                class="optimizer-status"
+                                id="scheduleStatus"
+                            >
+                                Select an appliance and operating period
+                                to create a schedule.
+                            </div>
+
+                        </div>
+
+
+                        <!-- INFORMATION -->
+
+                        <aside class="schedule-help">
+
+                            <div class="schedule-help-title">
+                                Renewable Scheduling
+                            </div>
+
+                            <div class="schedule-help-text">
+                                Schedules allow flexible appliances
+                                to be planned around renewable-energy
+                                availability.
+                            </div>
+
+
+                            <div
+                                class="info-row"
+                                style="margin-top: 12px;"
+                            >
+
+                                <span class="info-row-label">
+                                    Scheduling mode
+                                </span>
+
+                                <span class="info-row-value">
+                                    Renewable-aware
+                                </span>
+
+                            </div>
+
+
+                            <div class="info-row">
+
+                                <span class="info-row-label">
+                                    Priority considered
+                                </span>
+
+                                <span class="info-row-value">
+                                    Yes
+                                </span>
+
+                            </div>
+
+
+                            <div class="info-row">
+
+                                <span class="info-row-label">
+                                    Time constraints
+                                </span>
+
+                                <span class="info-row-value">
+                                    Yes
+                                </span>
+
+                            </div>
+
+                        </aside>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 DATA QUALITY
+            ================================================== -->
+
+            <section
+                class="panel"
+                id="data-quality"
+                style="margin-bottom: 20px;"
+            >
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2 class="panel-title">
+                            Data Quality &amp; Calculation Status
+                        </h2>
+
+                        <p class="panel-subtitle">
+                            Indicates the consistency of the energy
+                            readings used by dashboard calculations.
+                        </p>
+
+                    </div>
+
+
+                    <span
+                        class="badge badge-success"
+                        id="dataQualityBadge"
+                    >
+                        Checking
+                    </span>
+
+                </div>
+
+
+                <div class="panel-body">
+
+                    <div class="quality-indicator">
+
+                        <span class="metric-name">
+                            Dataset consistency
+                        </span>
+
+                        <span
+                            class="quality-value"
+                            id="dataQualityPercent"
+                        >
+                            --
+                        </span>
+
+                    </div>
+
+
+                    <div class="quality-bar">
+
+                        <div
+                            class="quality-bar-fill"
+                            id="dataQualityBar"
+                        ></div>
+
+                    </div>
+
+
+                    <div
+                        class="data-text"
+                        id="dataQualityDescription"
+                        style="margin-top: 7px;"
+                    >
+                        Checking energy-balance consistency...
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 SMART OPTIMIZER
+            ================================================== -->
+
+            <section
+                class="panel optimizer-panel"
+                id="optimizer"
+            >
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2 class="panel-title">
+                            Smart Renewable Energy Optimizer
+                        </h2>
+
+                        <p class="panel-subtitle">
+                            Rule-based scheduling recommendations
+                            using available renewable-energy windows.
+                        </p>
+
+                    </div>
+
+
+                    <span class="badge badge-success">
+                        Decision Support
+                    </span>
+
+                </div>
+
+
+                <div class="panel-body">
+
+
+                    <div class="optimizer-content">
+
+
+                        <div>
+
+                            <p class="optimizer-intro">
+                                Urja Mitra evaluates flexible appliances,
+                                user time constraints and renewable
+                                generation windows to recommend suitable
+                                operating periods.
+                            </p>
+
+
+                            <ul class="optimizer-points">
+
+                                <li>
+                                    Prioritizes renewable-energy availability.
+                                </li>
+
+                                <li>
+                                    Considers appliance priority and
+                                    operating constraints.
+                                </li>
+
+                                <li>
+                                    Estimates possible grid-energy reduction.
+                                </li>
+
+                                <li>
+                                    Provides explainable scheduling reasons.
+                                </li>
+
+                                <li>
+                                    Produces a Smart Daily Plan from
+                                    the latest available dataset.
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+
+                        <div class="optimizer-action">
+
+                            <button
+                                class="primary-button"
+                                id="runOptimizerButton"
+                                type="button"
+                            >
+                                Generate Smart Daily Plan
+                            </button>
+
+
+                            <div
+                                class="optimizer-status"
+                                id="optimizerStatus"
+                            >
+                                Recommendations are generated from
+                                the latest available sample data.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         OPTIMIZER RESULT
+                    ================================================== -->
+
+                    <div id="optimizerResult">
+
+
+                        <div class="optimizer-summary-grid">
+
+
+                            <div class="optimizer-summary-box">
+
+                                <div class="optimizer-summary-label">
+                                    Appliances Analyzed
+                                </div>
+
+                                <div
+                                    class="optimizer-summary-value"
+                                    id="optimizedAnalyzed"
+                                >
+                                    --
+                                </div>
+
+                            </div>
+
+
+                            <div class="optimizer-summary-box">
+
+                                <div class="optimizer-summary-label">
+                                    Appliances Optimized
+                                </div>
+
+                                <div
+                                    class="optimizer-summary-value"
+                                    id="optimizedCount"
+                                >
+                                    --
+                                </div>
+
+                            </div>
+
+
+                            <div class="optimizer-summary-box">
+
+                                <div class="optimizer-summary-label">
+                                    Avg. Optimization Score
+                                </div>
+
+                                <div
+                                    class="optimizer-summary-value"
+                                    id="optimizedScore"
+                                >
+                                    --
+                                </div>
+
+                            </div>
+
+
+                            <div class="optimizer-summary-box">
+
+                                <div class="optimizer-summary-label">
+                                    Estimated Grid Reduction
+                                </div>
+
+                                <div
+                                    class="optimizer-summary-value"
+                                    id="optimizedGridReduction"
+                                >
+                                    --
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="data-list"
+                            id="optimizerRecommendations"
+                            style="margin-top: 15px;"
+                        ></div>
+
+
+                        <div class="recommendation-box">
+
+                            <div class="recommendation-title">
+                                How the recommendation is determined
+                            </div>
+
+                            <div
+                                class="recommendation-text"
+                                id="optimizerExplanation"
+                            >
+                                Recommendations consider renewable
+                                availability, appliance priority,
+                                operating duration and user-defined
+                                time constraints.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================== -->
+
+    <footer class="footer">
+
+        <div class="container footer-inner">
+
+            <div>
+
+                <div class="footer-title">
+                    URJA MITRA
+                </div>
+
+                <div class="footer-text">
+                    Smart Renewable Energy Utilization &amp;
+                    Management System
+                </div>
+
+            </div>
+
+
+            <div class="footer-right">
+
+                Prototype system for renewable-energy
+                monitoring and decision support.
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =========================================================
+         CHART.JS
+         Served locally by Express backend.
+    ========================================================== -->
+
+    <script src="/vendor/chart.js/chart.umd.js"></script>
+
+
+    <!-- =========================================================
+         APPLICATION JAVASCRIPT
+    ========================================================== -->
+
+    <script src="/js/app.js"></script>
+
+
+</body>
+
+</html>
